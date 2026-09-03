@@ -1,0 +1,21 @@
+name = "dejotacode-local-api"
+main = "src/worker.ts"
+compatibility_date = "2026-09-01"
+
+# Configuração exclusiva para desenvolvimento local.
+# O UUID abaixo é deliberadamente local e nunca aponta para um D1 remoto.
+[[d1_databases]]
+binding = "DB"
+database_name = "dejotacode_os_local"
+database_id = "00000000-0000-0000-0000-000000000001"
+migrations_dir = "src/db/migrations"
+
+[vars]
+APP_ENV = "development"
+SESSION_TTL_SECONDS = "604800"
+APP_URL = "http://127.0.0.1:4321"
+
+# Em `wrangler dev --local`, o R2 é emulado localmente e persiste em .wrangler/state.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "dejotacode-media-local"

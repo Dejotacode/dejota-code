@@ -39,6 +39,11 @@ a {
   transition: color var(--transition-fast);
 }
 
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -125,7 +130,11 @@ h2 {
   padding: 12px 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast);
   will-change: transform;
 }
 
@@ -236,7 +245,9 @@ button:disabled {
 
 .post-card {
   display: block;
-  transition: transform var(--transition-base), border-color var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
   will-change: transform;
 }
 
@@ -486,7 +497,9 @@ button:disabled {
   padding: 0.35rem 0.65rem;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .copy-code:hover {
@@ -510,7 +523,9 @@ button:disabled {
   border-radius: 0.65rem;
   padding: 0.55rem 0.8rem;
   cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .action-button:hover {
@@ -697,7 +712,9 @@ button:disabled {
   border-radius: var(--radius-md);
   padding: 12px 14px;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .search input:focus {
@@ -783,7 +800,9 @@ button:disabled {
   border-radius: var(--radius-md);
   padding: 13px 14px;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .lead-form input:focus {

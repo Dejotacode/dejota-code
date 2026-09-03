@@ -4,18 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/dev-local.mjs",
     "build": "node scripts/build-site.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "typecheck": "astro check",
     "content:check": "astro check",
-    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:local": "wrangler d1 migrations apply DB --local --config wrangler.local.toml --persist-to .wrangler/state",
     "db:remote": "wrangler d1 migrations apply DB --remote",
     "deploy": "npm run build && wrangler pages deploy ./dist",
     "build:site": "node scripts/build-site.mjs",
     "validate:urls": "node scripts/validate-urls.mjs",
-    "release:check": "node scripts/release-hygiene.mjs && npm run check && npm run build && npm run validate:urls"
+    "release:check": "node scripts/release-hygiene.mjs && npm run check && npm run build && npm run validate:urls",
+    "local:setup": "node scripts/local-setup.mjs",
+    "dev:api": "node scripts/dev-api.mjs",
+    "dev:web": "node scripts/dev-web.mjs",
+    "dev:local": "node scripts/dev-local.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

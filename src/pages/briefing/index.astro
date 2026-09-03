@@ -22,7 +22,7 @@ const briefingEndpoint = apiBase ? `${apiBase}/api/public/briefing` : '/api/publ
           <label for="objective">Qual é o objetivo principal?</label><textarea id="objective" name="objective" rows="5" required></textarea>
           <label for="timeline">Prazo desejado</label><input id="timeline" name="timeline" type="text" placeholder="Ex.: nas próximas 4–6 semanas" />
           <label for="budget">Faixa de investimento</label><select id="budget" name="budget"><option value="">Prefiro conversar primeiro</option><option>Até R$ 1.500</option><option>R$ 1.500–3.000</option><option>R$ 3.000–6.000</option><option>Acima de R$ 6.000</option></select>
-          <label class="consent"><input type="checkbox" name="consent" required /> <span>Concordo com o tratamento dos dados para avaliação deste contato, conforme a <a href="/privacidade/">Política de Privacidade</a>.</span></label>
+          <label class="consent"><input type="checkbox" name="consent" value="true" required /> <span>Concordo com o tratamento dos dados para avaliação deste contato, conforme a <a href="/privacidade/">Política de Privacidade</a>.</span></label>
           <button class="btn btn-primary" type="submit">Enviar briefing →</button>
           <p class="form-status muted" data-form-status role="status">Preencha os campos acima para enviar seu briefing com segurança.</p>
         </form>

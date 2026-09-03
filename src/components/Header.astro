@@ -178,6 +178,13 @@ const { className = '' } = Astro.props;
     position: relative;
   }
 
+  .nav-menu summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 0;
+  }
+
   .nav-menu summary,
   .mobile-nav summary {
     cursor: pointer;
@@ -210,26 +217,60 @@ const { className = '' } = Astro.props;
 
   .nav-dropdown {
     position: absolute;
-    right: 0;
-    top: calc(100% + 16px);
+    left: 50%;
+    top: calc(100% + 8px);
     display: grid;
-    min-width: 170px;
+    width: max-content;
+    min-width: 190px;
     gap: 4px;
     padding: var(--space-xs);
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow);
+    transform: translateX(-50%);
+    animation: dropdown-in var(--transition-base);
+  }
+
+  .nav-menu:first-of-type .nav-dropdown {
+    left: 0;
+    transform: none;
+  }
+
+  .nav-menu:last-of-type .nav-dropdown {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+
+  @keyframes dropdown-in {
+    from { opacity: 0; transform: translate(-50%, -5px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  .nav-menu:first-of-type .nav-dropdown,
+  .nav-menu:last-of-type .nav-dropdown {
+    animation-name: dropdown-edge-in;
+  }
+
+  @keyframes dropdown-edge-in {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .nav-dropdown a {
-    padding: 8px 10px;
+    min-height: 40px;
+    padding: 9px 10px;
     white-space: nowrap;
   }
 
   .nav-dropdown a:hover {
     background: var(--surface-2);
     border-radius: var(--radius-sm);
+  }
+
+  .nav-dropdown a:focus-visible {
+    outline-offset: -2px;
   }
 
   .nav-cta {

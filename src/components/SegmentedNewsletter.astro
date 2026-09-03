@@ -23,7 +23,7 @@ const source = Astro.url.pathname;
     <input type="hidden" name="segment" value={segment} />
     <input type="hidden" name="source" value={source} />
     <label class="consent compact-consent">
-      <input name="consent" type="checkbox" required />
+      <input name="consent" type="checkbox" value="true" required />
       <span>Aceito receber conteúdo e posso cancelar quando quiser.</span>
     </label>
     <button class="btn btn-primary" type="submit" data-event="newsletter_submit">Quero receber →</button>

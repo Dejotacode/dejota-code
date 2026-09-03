@@ -102,3 +102,19 @@ npm run release:check
 ```
 
 Consulte `docs/RELEASE-CANDIDATE-1-5.37.1.md` e `docs/CONSOLIDACAO-FINAL-5.37.1.md` para o gate de release, arquitetura e homologação.
+
+## Desenvolvimento local completo (Fase 14.1)
+
+Para iniciar Astro + Worker + D1 + R2 localmente:
+
+```bash
+npm ci
+cp .dev.vars.example .dev.vars
+npm run dev:local
+```
+
+- Site: `http://127.0.0.1:4321`
+- API: `http://127.0.0.1:8787`
+- Admin/CMS: `http://127.0.0.1:8787/admin`
+
+Consulte `docs/AMBIENTE-LOCAL-FASE-14.1.md` para o fluxo completo.
