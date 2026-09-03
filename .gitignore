@@ -1,0 +1,13 @@
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.*
+wrangler.toml
+.DS_Store
+npm-debug.log*
+
+dist/
+.astro/
+pnpm-lock.yaml
+pnpm-workspace.yaml

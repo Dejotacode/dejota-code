@@ -1,0 +1,9 @@
+---
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<aside class:list={['affiliate-disclosure', compact && 'compact']} aria-label="Aviso de links de afiliado">
+  <strong>Transparência:</strong>
+  <span>Alguns links podem ser de afiliado. Se você comprar por eles, a Dejotacode pode receber uma comissão, sem custo adicional para você.</span>
+  <a href="/afiliados/">Saiba como fazemos recomendações →</a>
+</aside>

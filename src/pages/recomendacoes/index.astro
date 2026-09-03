@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import { affiliateCategories, plannedRecommendations } from '../../data/affiliates';
+---
+<BaseLayout title="Recomendações — Dejotacode" description="Central de recomendações da Dejotacode, com critérios editoriais e transparência sobre afiliados.">
+  <section class="section affiliate-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Recomendações</span>
+        <h1>Ferramentas e serviços que podem ajudar</h1>
+        <p class="lead">Esta central será usada para organizar recomendações por problema, público e critérios. O objetivo é ajudar na decisão, não empurrar uma compra.</p>
+      </div>
+      <AffiliateDisclosure />
+      <div class="cards-grid">
+        {plannedRecommendations.map((item) => {
+          const category = affiliateCategories.find((c) => c.id === item.category);
+          return <article class="card recommendation-card"><span class="tag">{category?.name}</span><h2>{item.title}</h2><p class="muted">Conteúdo relacionado: <a class="text-link" href={item.articlePath}>ver guia →</a></p><p><strong>Status:</strong> {item.status}</p><p class="muted">Nenhum link comercial foi ativado ainda.</p></article>;
+        })}
+      </div>
+      <div class="card recommendation-note"><h2>Como uma recomendação será publicada</h2><ol><li>Definir o problema e o público.</li><li>Validar produto, preço, condições e fornecedor.</li><li>Comparar alternativas quando relevante.</li><li>Explicar vantagens e limitações.</li><li>Adicionar disclosure e link oficial.</li><li>Medir cliques e revisar periodicamente.</li></ol></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts } from '../../lib/editorial';
+const posts = (await getPublishedPosts()).sort((a,b) => b.publishedAt.valueOf()-a.publishedAt.valueOf());
+const featured = posts.filter((post) => post.featured);
+const regular = posts.filter((post) => !post.featured);
+---
+<BaseLayout title="Blog — Dejotacode" description="Tutoriais, tecnologia, IA e estratégias práticas do Dejotacode.">
+  <section class="section"><div class="container">
+    <span class="eyebrow">Blog</span><h1>Conteúdo para colocar em prática.</h1>
+    <p class="lead">Aprenda algo novo, construa seus projetos e encontre o próximo passo da sua jornada digital.</p>
+    {featured.length > 0 && <><div class="section-heading"><h2>Em destaque</h2></div><div class="grid grid-3">{featured.map((post)=><PostCard post={post}/>)}</div></>}
+    <div class="section-heading"><h2>Todos os artigos</h2><span class="muted">{posts.length} publicação{posts.length===1?'':'ões'}</span></div>
+    <div class="grid grid-3">{regular.map((post)=><PostCard post={post}/>)}</div>
+    {posts.length===0 && <div class="card"><h2>Em breve.</h2><p class="muted">Os primeiros artigos estão sendo preparados.</p></div>}
+  </div></section>
+</BaseLayout>

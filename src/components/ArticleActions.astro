@@ -1,0 +1,8 @@
+---
+const { title, url } = Astro.props;
+---
+<div class="article-actions" data-share-tools data-title={title} data-url={url} aria-label="Ações do artigo">
+  <button type="button" class="action-button" data-copy-link>🔗 Copiar link</button>
+  <button type="button" class="action-button" data-share>↗ Compartilhar</button>
+  <span class="action-feedback" data-action-feedback role="status" aria-live="polite"></span>
+</div>

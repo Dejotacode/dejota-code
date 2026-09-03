@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProposalCard from '../components/ProposalCard.astro';
+import { proposalConfig, proposalStages, contractClauses, commercialRules } from '../data/commercial';
+---
+<BaseLayout title="Propostas, Contratos e Onboarding — Dejotacode" description="Estrutura comercial da Dejotacode para propostas, contratos e onboarding de clientes.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.22 · Operação comercial</span>
+        <h1>Da proposta assinada ao projeto bem iniciado.</h1>
+        <p class="lead">Um processo claro para transformar oportunidades qualificadas em contratos organizados e clientes bem recebidos.</p>
+      </div>
+
+      <div class="card commercial-status">
+        <span class="tag">Modelo comercial preparado</span>
+        <h2>Propostas, contratos e onboarding em uma sequência única.</h2>
+        <p>{proposalConfig.note}</p>
+      </div>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Fluxo</span><h2>6 passos do comercial ao kickoff</h2></div>
+        <div class="proposal-grid">
+          {proposalStages.map((item, index) => <ProposalCard number={String(index + 1).padStart(2, '0')} stage={item.stage} goal={item.goal} />)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Proposta</span><h2>O que toda proposta deve deixar claro</h2></div>
+        <div class="cards-grid">
+          {proposalConfig.sections.map((section) => <div class="card commercial-item"><strong>{section}</strong><p>Registrar este ponto antes do envio ao cliente.</p></div>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Contrato</span><h2>Cláusulas essenciais</h2></div>
+        <div class="card commercial-list"><ol>{contractClauses.map((clause) => <li>{clause}</li>)}</ol></div>
+        <p class="section-note muted">Este conteúdo é uma estrutura operacional, não aconselhamento jurídico. O contrato final deve ser adequado ao projeto e, quando necessário, revisado por profissional habilitado.</p>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Governança</span><h2>Regras para vender sem criar problemas depois</h2></div>
+        <ul class="card commercial-rules">{commercialRules.map((rule) => <li>✓ {rule}</li>)}</ul>
+      </section>
+
+      <div class="conversion-box card">
+        <div><span class="eyebrow">Próximo passo</span><h2>Já existe um lead qualificado?</h2><p>Leve o contato para o briefing e, depois, siga para diagnóstico, proposta e contrato.</p></div>
+        <a class="btn btn-primary" href="/briefing/">Abrir briefing →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

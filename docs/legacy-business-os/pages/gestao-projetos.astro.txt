@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectStage from '../components/ProjectStage.astro';
+import { projectConfig, projectStages, projectMilestones, deliveryChecklist, postSaleSequence, projectEvents, postSaleRules } from '../data/project-management';
+---
+<BaseLayout title="Gestão de Projetos, Entregas e Pós-venda — Dejotacode" description="Processo da Dejotacode para gestão de projetos, entregas, aceite, feedback, indicação e pós-venda.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.23 · Operação de projetos</span>
+        <h1>Do contrato à entrega — e da entrega ao próximo projeto.</h1>
+        <p class="lead">Fechamos o ciclo comercial com uma operação simples: planejar, executar, entregar, obter aceite e transformar uma boa experiência em relacionamento de longo prazo.</p>
+      </div>
+
+      <div class="card project-status">
+        <span class="tag">Gestão {projectConfig.enabled ? 'ativa' : 'preparada'}</span>
+        <h2>Uma base operacional pronta para crescer.</h2>
+        <p>{projectConfig.note}</p>
+      </div>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Ciclo do projeto</span><h2>6 etapas até o encerramento</h2></div>
+        <div class="project-grid">
+          {projectStages.map((stage, index) => <ProjectStage number={String(index + 1).padStart(2, '0')} name={stage.name} goal={stage.goal} deliverable={stage.deliverable} />)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Marcos</span><h2>O projeto precisa sempre ter um próximo marco</h2></div>
+        <div class="milestone-grid">
+          {projectMilestones.map((item) => <article class="card milestone-card"><span class="tag">{item.owner}</span><h3>{item.name}</h3><p>{item.checkpoint}</p></article>)}
+        </div>
+      </section>
+
+      <section id="entrega" class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Entrega</span><h2>Checklist antes de pedir o aceite</h2></div>
+        <ul class="card check-list project-checklist">
+          {deliveryChecklist.map((item) => <li>✓ {item}</li>)}
+        </ul>
+      </section>
+
+      <section id="pos-venda" class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Pós-venda</span><h2>Relacionamento depois da entrega</h2></div>
+        <ol class="card timeline-list post-sale-timeline">
+          {postSaleSequence.map((item) => <li><strong>{item.day}</strong> — {item.action}</li>)}
+        </ol>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Automação</span><h2>Eventos preparados para o futuro</h2></div>
+        <div class="event-cloud card">
+          {projectEvents.map((event) => <code>{event}</code>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Governança</span><h2>Regras para entregar bem e vender novamente sem forçar</h2></div>
+        <ul class="card check-list project-rules">
+          {postSaleRules.map((rule) => <li>✓ {rule}</li>)}
+        </ul>
+      </section>
+
+      <div class="conversion-box card project-next-step">
+        <div><span class="tag">Ciclo fechado</span><h2>Contrato → projeto → entrega → relacionamento</h2><p>O próximo passo é conectar esta operação ao CRM e aos serviços para que cada cliente tenha histórico e contexto do início ao pós-venda.</p></div>
+        <div class="project-actions"><a class="btn btn-primary" href="/crm/" data-event="crm_view">Ver CRM →</a><a class="btn btn-secondary" href="/servicos/" data-event="service_view">Ver serviços</a></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

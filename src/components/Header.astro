@@ -1,0 +1,576 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+<header class:list={["site-header", className]}>
+  <div class="container header-inner">
+    <!-- Marca Principal -->
+    <a class="brand" href="/" aria-label="Dejotacode início">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span>Dejotacode</span>
+    </a>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/comece-aqui/">Comece aqui</a>
+      <details class="nav-menu">
+        <summary>Conteúdos</summary>
+        <div class="nav-dropdown">
+          <a href="/blog/">Blog</a>
+          <a href="/buscar/">Buscar</a>
+          <a href="/renda-digital/">Renda digital</a>
+        </div>
+      </details>
+      <details class="nav-menu">
+        <summary>Soluções</summary>
+        <div class="nav-dropdown">
+          <a href="/projetos/">Projetos</a>
+          <a href="/servicos/">Serviços</a>
+          <a href="/produtos/">Produtos</a>
+        </div>
+      </details>
+      <details class="nav-menu">
+        <summary>Mais</summary>
+        <div class="nav-dropdown">
+          <a href="/recursos/">Recursos</a>
+          <a href="/email-marketing/">E-mail</a>
+          <a href="/portfolio/">Portfólio</a>
+          <a href="/sobre/">Sobre</a>
+          <a href="/contato/">Contato</a>
+        </div>
+      </details>
+
+      <!-- Painel de Busca Desktop -->
+      <form class="nav-search" action="/buscar/" method="get" role="search">
+        <label class="sr-only" for="nav-search-input">Buscar no Dejotacode</label>
+        <button class="search-trigger" type="button" aria-label="Abrir pesquisa" aria-expanded="false">
+          <span class="search-icon" aria-hidden="true"></span>
+        </button>
+        <div class="nav-search-panel" aria-hidden="true">
+          <input id="nav-search-input" name="q" type="search" placeholder="Buscar artigos..." autocomplete="off" />
+          <button class="search-close" type="button" aria-label="Fechar e limpar pesquisa">×</button>
+        </div>
+      </form>
+
+      <a class="nav-cta" href="/newsletter/">Newsletter</a>
+    </nav>
+
+    <!-- Ações do Cabeçalho -->
+    <div class="header-actions">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Alternar tema">
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+      <button id="menu-toggle" class="icon-btn mobile-only" type="button" aria-label="Abrir menu" aria-controls="mobile-nav" aria-expanded="false">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Navegação Mobile -->
+  <nav id="mobile-nav" class="mobile-nav container" aria-label="Navegação mobile" hidden>
+    <form class="mobile-search" action="/buscar/" method="get" role="search">
+      <label class="sr-only" for="mobile-search-input">Buscar no Dejotacode</label>
+      <div class="mobile-search-field">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="mobile-search-input" name="q" type="search" placeholder="Buscar artigos..." autocomplete="off" />
+        <button class="search-close" type="button" aria-label="Fechar e limpar pesquisa">×</button>
+      </div>
+    </form>
+    <a href="/comece-aqui/">Comece aqui</a>
+    <a href="/newsletter/">Newsletter</a>
+    <details>
+      <summary>Conteúdos</summary>
+      <a href="/blog/">Blog</a>
+      <a href="/buscar/">Buscar</a>
+      <a href="/renda-digital/">Renda digital</a>
+    </details>
+    <details>
+      <summary>Soluções</summary>
+      <a href="/projetos/">Projetos</a>
+      <a href="/servicos/">Serviços</a>
+      <a href="/produtos/">Produtos</a>
+    </details>
+    <details>
+      <summary>Mais</summary>
+      <a href="/recursos/">Recursos</a>
+      <a href="/email-marketing/">E-mail</a>
+      <a href="/portfolio/">Portfólio</a>
+      <a href="/sobre/">Sobre</a>
+      <a href="/contato/">Contato</a>
+    </details>
+  </nav>
+</header>
+
+<style>
+  /* ==========================================================================
+     1. CABEÇALHO PRINCIPAL E LAYOUT BASE
+     ========================================================================== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  /* Marca */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    white-space: nowrap;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  /* ==========================================================================
+     2. NAVEGAÇÃO DESKTOP E DROPDOWNS
+     ========================================================================== */
+  .nav {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .nav a,
+  .nav-menu summary,
+  .mobile-nav a,
+  .mobile-nav summary {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color var(--transition-fast);
+  }
+
+  .nav a:hover,
+  .nav-menu summary:hover,
+  .mobile-nav a:hover,
+  .mobile-nav summary:hover {
+    color: var(--primary);
+  }
+
+  /* Submenus (Details/Summary) */
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-menu summary,
+  .mobile-nav summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .nav-menu summary::-webkit-details-marker,
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-menu summary::after,
+  .mobile-nav summary::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 0 3px 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--transition-fast);
+  }
+
+  .nav-menu[open] summary::after,
+  .mobile-nav details[open] summary::after {
+    transform: rotate(225deg);
+    margin-bottom: 0;
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 16px);
+    display: grid;
+    min-width: 170px;
+    gap: 4px;
+    padding: var(--space-xs);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-dropdown a {
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown a:hover {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-cta {
+    color: var(--primary) !important;
+  }
+
+  /* Animação do Indicador de Hover */
+  .nav a,
+  .nav-menu summary {
+    position: relative;
+  }
+
+  .nav a:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--brand-coral));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-base);
+  }
+
+  .nav a:not(.nav-cta):hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* ==========================================================================
+     3. PESQUISA DESKTOP (OTIMIZADA COM GPU TRANSFORM/OPACITY)
+     ========================================================================== */
+  .nav-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-trigger {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+  }
+
+  .search-trigger:hover {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--primary);
+  }
+
+  .search-icon {
+    position: relative;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+  }
+
+  .search-icon::after {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 2px;
+    right: -6px;
+    bottom: -3px;
+    background: currentColor;
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+
+  /* Painel flutuante de busca */
+  .nav-search-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    display: flex;
+    align-items: center;
+    width: 280px;
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(-8px);
+    transform-origin: top right;
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+    pointer-events: none;
+  }
+
+  .nav-search.is-open .nav-search-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-search-panel input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    padding: 8px;
+    outline: 0;
+  }
+
+  .search-close {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .search-close:hover {
+    color: var(--primary);
+  }
+
+  /* ==========================================================================
+     4. BOTÕES DE AÇÃO E ÍCONES
+     ========================================================================== */
+  .header-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .icon-btn:hover {
+    border-color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 8%, var(--surface));
+  }
+
+  .icon-btn:active {
+    transform: scale(0.94);
+  }
+
+  .theme-icon {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-icon::after {
+    content: '';
+    position: absolute;
+    inset: -2px 7px -2px -2px;
+    background: currentColor;
+  }
+
+  .menu-icon,
+  .menu-icon::before,
+  .menu-icon::after {
+    display: block;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .menu-icon {
+    position: relative;
+  }
+
+  .menu-icon::before,
+  .menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-icon::before {
+    top: -5px;
+  }
+
+  .menu-icon::after {
+    top: 5px;
+  }
+
+  .mobile-only,
+  .mobile-nav {
+    display: none;
+  }
+
+  /* ==========================================================================
+     5. NAVEGAÇÃO MOBILE
+     ========================================================================== */
+  .mobile-nav {
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+
+  .mobile-nav[hidden] {
+    display: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+  }
+
+  .mobile-nav:not([hidden]) {
+    display: grid;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-search {
+    display: none;
+  }
+
+  /* ==========================================================================
+     6. RESPONSIVIDADE
+     ========================================================================== */
+  @media (max-width: 1050px) {
+    .nav {
+      display: none;
+    }
+
+    .mobile-only {
+      display: grid;
+    }
+
+    .mobile-nav {
+      padding: 12px 0 20px;
+      gap: 10px;
+    }
+
+    .mobile-nav details {
+      display: grid;
+      gap: 8px;
+      padding-top: 4px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-nav summary {
+      padding-top: 8px;
+    }
+
+    .mobile-nav details a {
+      padding-left: 12px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .nav-search {
+      display: none;
+    }
+
+    .mobile-search {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .mobile-search-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .mobile-search-field:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent);
+    }
+
+    .mobile-search-field input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 10px 0;
+      outline: 0;
+    }
+
+    .mobile-nav a:not(.nav-cta) {
+      position: relative;
+    }
+
+    .mobile-nav a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 2px;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--brand-coral));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--transition-base);
+    }
+
+    .mobile-nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search-trigger,
+    .nav-search-panel,
+    .mobile-nav,
+    .icon-btn,
+    .nav a:not(.nav-cta)::after {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script src="../scripts/theme.ts"></script>
+<script src="../scripts/navigation.ts"></script>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { services, idealClientCriteria, leadPipeline, serviceEvents, serviceRules } from '../../data/services';
+---
+<BaseLayout title="Serviços Digitais e Freelancing — Dejotacode" description="Serviços de criação de sites, landing pages, otimização, consultoria em tecnologia e IA para pequenos negócios e profissionais.">
+<section class="section conversion-page service-page"><div class="container">
+<div class="page-hero"><span class="eyebrow">Etapa 5.20</span><h1>Serviços que transformam problemas digitais em projetos executáveis.</h1><p class="lead">A Dejotacode une conteúdo, tecnologia e execução para ajudar pequenos negócios, profissionais e criadores a construir uma presença digital mais útil e preparada para crescer.</p><div class="hero-actions"><a class="btn btn-primary" data-event="service_interest" href="/briefing/">Solicitar briefing →</a><a class="btn btn-secondary" href="/portfolio/">Ver portfólio</a></div></div>
+<div class="service-grid">{services.map((service) => <ServiceCard service={service} />)}</div>
+<div class="section-heading"><div><span class="eyebrow">Como funciona</span><h2>Do problema à entrega</h2></div></div><div class="funnel-grid">{leadPipeline.map((item,index)=><article class="card funnel-step"><span class="step-number">{String(index+1).padStart(2,'0')}</span><h2>{item.stage}</h2><p>{item.goal}</p></article>)}</div>
+<div class="section-heading"><div><span class="eyebrow">Qualificação</span><h2>Antes de aceitar um projeto</h2></div></div><div class="card"><ul class="check-list">{idealClientCriteria.map((item)=><li>{item}</li>)}</ul></div>
+<div class="section-heading"><div><span class="eyebrow">Processo comercial</span><h2>Briefing primeiro, proposta depois.</h2></div></div><div class="conversion-box card"><div><h2>Conte o que você precisa</h2><p>O briefing organiza objetivo, contexto, prazo e escopo inicial. Depois avaliamos se existe aderência e qual é o próximo passo.</p></div><a class="btn btn-primary" data-event="briefing_start" href="/briefing/">Abrir briefing →</a></div>
+<div class="section-heading"><div><span class="eyebrow">Regras</span><h2>Freelancing com transparência</h2></div></div><div class="card"><ul class="check-list">{serviceRules.map((rule)=><li>{rule}</li>)}</ul></div>
+<div class="section-heading"><div><span class="eyebrow">Medição</span><h2>Eventos da operação</h2></div></div><div class="tags">{serviceEvents.map((event)=><span class="tag">{event}</span>)}</div>
+<div class="cta-banner"><div><span class="eyebrow">Próximo passo</span><h2>Transformar interesse em oportunidade qualificada.</h2><p>O formulário é provider-neutral: a captura real só será ativada quando um endpoint seguro de leads/CRM for configurado.</p></div><a class="btn btn-primary" data-event="briefing_start" href="/briefing/">Começar briefing →</a></div>
+</div></section></BaseLayout>

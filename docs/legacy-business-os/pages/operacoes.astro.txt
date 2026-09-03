@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OSModule from '../components/OSModule.astro';
+import { businessOSConfig, osModules, operatingFlow, cadences, commandCenter, governance, automationRules, osEvents } from '../data/business-os';
+---
+<BaseLayout title="Centro de Operações — Dejotacode Business OS" description="Centro de operações do Dejotacode: processos, áreas, automações, cadências, governança e Business Intelligence.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.26 · Business OS</span>
+        <h1>Um centro de operações para transformar estratégia em execução.</h1>
+        <p class="lead">O Business OS conecta marketing, vendas, contratos, projetos, relacionamento, financeiro e BI em um fluxo operacional único — sem transformar o site em um depósito de dados sensíveis.</p>
+      </div>
+
+      <div class="card os-status">
+        <span class="tag">Business OS {businessOSConfig.enabled ? 'ativo' : 'preparado'}</span>
+        <h2>Arquitetura pronta para centralizar decisões.</h2>
+        <p>{businessOSConfig.note}</p>
+        <small><strong>Princípio:</strong> {businessOSConfig.sourceOfTruth}</small>
+      </div>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Arquitetura</span><h2>8 áreas trabalhando como um sistema</h2></div>
+        <div class="os-module-grid">
+          {osModules.map((module, index) => <OSModule number={String(index + 1).padStart(2, '0')} {...module} />)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Operating flow</span><h2>Do primeiro contato à melhoria contínua</h2></div>
+        <div class="os-flow">
+          {operatingFlow.map((item) => <article class="card os-flow-step"><span>{item.step}</span><h3>{item.name}</h3><p>{item.detail}</p></article>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Command Center</span><h2>As perguntas que a gestão precisa responder</h2></div>
+        <div class="command-grid">
+          {commandCenter.map((area) => <article class="card command-card"><span class="tag">{area.area}</span><ul>{area.questions.map((question) => <li>{question}</li>)}</ul></article>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Cadência</span><h2>Ritmo de gestão</h2></div>
+        <div class="cadence-grid">
+          {cadences.map((item) => <article class="card cadence-card"><span class="step-number">{item.cadence.slice(0,1)}</span><h3>{item.cadence}</h3><p>{item.focus}</p></article>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Automação</span><h2>Automatizar o fluxo, não substituir o julgamento</h2></div>
+        <div class="automation-grid">
+          {automationRules.map((rule) => <article class="card automation-card"><code>{rule.trigger}</code><span>→</span><p>{rule.action}</p></article>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Eventos</span><h2>Eventos de integração</h2></div>
+        <div class="event-cloud card">{osEvents.map((event) => <code>{event}</code>)}</div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Governança</span><h2>O Business OS precisa ser confiável</h2></div>
+        <ul class="card check-list os-rules">{governance.map((rule) => <li>✓ {rule}</li>)}</ul>
+      </section>
+
+      <div class="conversion-box card os-next-step">
+        <div><span class="tag">Centro de comando</span><h2>Operação → dados → decisão → ação.</h2><p>O Business OS organiza a operação sem acoplar o Dejotacode a um fornecedor específico. A próxima evolução pode conectar provedores reais conforme a operação exigir.</p></div>
+        <div class="os-actions"><a class="btn btn-primary" href="/dashboard/" data-event="dashboard_view">Ver BI →</a><a class="btn btn-secondary" href="/crm/" data-event="crm_view">Ver CRM</a></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

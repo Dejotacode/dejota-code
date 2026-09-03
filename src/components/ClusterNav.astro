@@ -1,0 +1,14 @@
+---
+import { categories } from '../data/categories';
+import { getCluster } from '../data/content-strategy';
+const { clusterSlug } = Astro.props;
+const cluster = getCluster(clusterSlug);
+const category = cluster ? categories.find((item) => item.name === cluster.pillar || (item.name === 'Inteligência Artificial' && cluster.pillar === 'Inteligência Artificial')) : undefined;
+---
+{cluster && <section class="cluster-nav card" aria-labelledby="cluster-title">
+  <span class="eyebrow">Cluster de conteúdo</span>
+  <h2 id="cluster-title">{cluster.pillar}: {cluster.description}</h2>
+  <div class="cluster-keywords">{cluster.keywords.map((keyword) => <span class="tag tag-muted">{keyword}</span>)}</div>
+  <p class="muted">Explore a trilha completa e avance do fundamento para a aplicação prática.</p>
+  {category && <a class="btn btn-secondary" href={`/${category.slug}/`}>Ver hub de {category.name} →</a>}
+</section>}

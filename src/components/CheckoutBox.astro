@@ -1,0 +1,16 @@
+---
+interface Props {
+  product: string;
+  description?: string;
+  href?: string;
+  label?: string;
+  enabled?: boolean;
+}
+const { product, description = 'Checkout real será ativado após a configuração segura do provedor.', href = '/checkout/', label = 'Continuar para checkout', enabled = false } = Astro.props;
+---
+<aside class="card checkout-box" data-checkout-product={product}>
+  <span class="tag">{enabled ? 'Checkout disponível' : 'Checkout em preparação'}</span>
+  <h2>{product}</h2>
+  <p class="muted">{description}</p>
+  <a class={`btn ${enabled ? 'btn-primary' : 'btn-secondary'}`} data-event="checkout_start" href={href}>{enabled ? label : 'Ver como funciona'} →</a>
+</aside>

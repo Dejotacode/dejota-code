@@ -1,0 +1,11 @@
+---
+interface Props { name: string; group: string; definition: string; formula: string; target: string; }
+const { name, group, definition, formula, target } = Astro.props;
+---
+<article class="card kpi-card">
+  <span class="tag">{group}</span>
+  <h3>{name}</h3>
+  <p>{definition}</p>
+  <code>{formula}</code>
+  <small>{target}</small>
+</article>

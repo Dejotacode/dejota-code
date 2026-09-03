@@ -1,0 +1,11 @@
+---
+const { name = 'Dejotacode', role = 'Conteúdo e tecnologia' } = Astro.props;
+---
+<section class="author-box card" aria-label="Sobre o autor">
+  <div class="author-avatar" aria-hidden="true">D</div>
+  <div>
+    <span class="eyebrow">Sobre o autor</span>
+    <h2>{name}</h2>
+    <p>{role}. Conteúdo direto ao ponto para aprender, construir e transformar conhecimento em renda.</p>
+  </div>
+</section>

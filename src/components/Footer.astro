@@ -1,0 +1,189 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+<footer class:list={["footer", className]}>
+  <div class="container footer-grid">
+    <div class="footer-intro">
+      <a class="brand" href="/" aria-label="Dejotacode início">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>Dejotacode</span>
+      </a>
+      <p class="muted">Aqui transformo conhecimento em renda.</p>
+      <nav class="social-links" aria-label="Redes sociais">
+        <a href="https://instagram.com/dejotacode" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://youtube.com/@dejotacode" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.2a2.8 2.8 0 0 0-2-2C17.3 5.7 12 5.7 12 5.7s-5.3 0-7 .5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.5 12 29 29 0 0 0 3 15.8a2.8 2.8 0 0 0 2 2c1.7.5 7 .5 7 .5s5.3 0 7-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-3.8 29 29 0 0 0-.5-3.8Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/dejotacode" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 6v.1M10 18v-5a4 4 0 0 1 8 0v5M10 9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="https://github.com/dejotacode" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.2-4-2-5-2m10 4v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.7 4.7 0 0 0-1.3-3.3A4.4 4.4 0 0 0 17.6 3S16.5 2.7 14 4a10 10 0 0 0-5 0C6.5 2.7 5.4 3 5.4 3a4.4 4.4 0 0 0-.1 3.2A4.7 4.7 0 0 0 4 10.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.1-.5 2V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://x.com/dejotacode" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 4 14 16M19 4 5 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </nav>
+    </div>
+    <nav class="footer-section" aria-labelledby="footer-explore-title">
+      <strong id="footer-explore-title">Explore</strong>
+      <a href="/comece-aqui/">Comece aqui</a>
+      <a href="/blog/">Blog</a>
+      <a href="/newsletter/">Newsletter</a>
+    </nav>
+    <nav class="footer-section" aria-labelledby="footer-trails-title">
+      <strong id="footer-trails-title">Trilhas</strong>
+      <a href="/programacao/">Programação</a>
+      <a href="/linux-seguranca/">Linux & Segurança</a>
+      <a href="/renda-digital/">Renda Digital</a>
+      <a href="/ia/">IA</a>
+    </nav>
+    <nav class="footer-section" aria-labelledby="footer-work-title">
+      <strong id="footer-work-title">Projetos</strong>
+      <a href="/projetos/">Projetos</a>
+      <a href="/servicos/">Serviços</a>
+      <a href="/portfolio/">Portfólio</a>
+      <a href="/contato/">Contato</a>
+    </nav>
+    <nav class="footer-section" aria-labelledby="footer-legal-title">
+      <strong id="footer-legal-title">Institucional</strong>
+      <a href="/sobre/">Sobre</a>
+      <a href="/privacidade/">Privacidade</a>
+      <a href="/termos/">Termos</a>
+    </nav>
+  </div>
+  <div class="container copyright">© 2026 Dejotacode. Todos os direitos reservados.</div>
+</footer>
+
+<style>
+  /* Base e Grid do Rodapé */
+  .footer {
+    padding: var(--space-3xl) 0 var(--space-lg);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .footer-section,
+  .footer-intro {
+    display: grid;
+    align-content: start;
+    gap: var(--space-xs);
+  }
+
+  .footer-grid strong {
+    font-family: var(--font-heading);
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer-section a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-section a:hover {
+    color: var(--primary);
+  }
+
+  /* Redes Sociais */
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--muted);
+    transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .social-links a svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+  }
+
+  .social-links a:hover {
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 8%, var(--surface));
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  /* Copyright */
+  .copyright {
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    padding-top: 20px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Marca */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  /* Responsividade */
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .footer-intro {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer-intro {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-links a,
+    .footer-section a {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

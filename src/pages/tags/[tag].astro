@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts } from '../../lib/editorial';
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const tags = [...new Set(posts.flatMap((post) => post.tags))];
+  return tags.map((tag) => ({ params: { tag }, props: { tag, posts: posts.filter((post) => post.tags.includes(tag)) } }));
+}
+const { tag, posts } = Astro.props;
+---
+<BaseLayout title={`#${tag} — Dejotacode`} description={`Artigos do Dejotacode sobre ${tag}.`}>
+  <section class="section"><div class="container"><span class="eyebrow">Tag</span><h1>#{tag}</h1><p class="lead">{posts.length} artigo{posts.length === 1 ? '' : 's'} relacionado{posts.length === 1 ? '' : 's'}.</p><div class="grid grid-3">{posts.map((post) => <PostCard post={post} />)}</div></div></section>
+</BaseLayout>

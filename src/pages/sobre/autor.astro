@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteAuthor } from '../../data/author';
+---
+<BaseLayout title="Autoridade editorial — Dejotacode" description="Conheça os princípios editoriais, autoria e processo de revisão do Dejotacode." canonical="/sobre/autor/">
+  <section class="section"><div class="container narrow">
+    <span class="eyebrow">Transparência editorial</span>
+    <h1>Autoria, experiência e revisão</h1>
+    <p class="lead">O Dejotacode busca produzir conteúdo útil, claro e responsável, deixando explícito quem publica, quando o conteúdo foi atualizado e quais referências sustentam informações que exigem fonte.</p>
+    <div class="card" style="padding:1.5rem;margin-top:1.5rem">
+      <h2>{siteAuthor.name}</h2><p>{siteAuthor.description}</p>
+      <h3>Princípios editoriais</h3>
+      <ul>{siteAuthor.principles.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <p>Conteúdos que dependem de fatos, números, documentação ou recomendações devem ser revisados e atualizados quando novas informações relevantes surgirem. Quando uma fonte externa for necessária, ela deve ser indicada no próprio artigo.</p>
+  </div></section>
+</BaseLayout>

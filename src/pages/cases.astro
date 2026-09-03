@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { caseStudyStructure, caseStudyChecklist } from '../data/customer-success';
+---
+<BaseLayout title="Cases de Sucesso — Dejotacode" description="Estrutura editorial da Dejotacode para documentar cases de sucesso com contexto, solução, processo e resultados reais.">
+  <section class="section conversion-page"><div class="container">
+    <div class="page-hero"><span class="eyebrow">Cases de sucesso</span><h1>Resultados reais, contexto real.</h1><p class="lead">Um case bom não é propaganda disfarçada. É uma história verificável que mostra problema, decisões, execução, resultado e aprendizado.</p></div>
+    <div class="case-grid">{caseStudyStructure.map((item) => <article class="card case-step"><span class="step-number">{item.step}</span><h2>{item.name}</h2><p>{item.goal}</p></article>)}</div>
+    <section class="section-tight"><div class="section-heading"><span class="eyebrow">Checklist editorial</span><h2>Antes de publicar</h2></div><ul class="card check-list customer-list">{caseStudyChecklist.map((item) => <li>✓ {item}</li>)}</ul></section>
+    <div class="card case-template"><span class="tag">Modelo</span><h2>Estrutura de um case Dejotacode</h2><p><strong>Contexto → Problema → Solução → Processo → Resultado → Aprendizado → Depoimento autorizado → CTA contextual.</strong></p><a class="btn btn-primary" href="/servicos/">Conhecer serviços</a></div>
+  </div></section>
+</BaseLayout>

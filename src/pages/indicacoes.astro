@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { referralFlow, customerSuccessEvents } from '../data/customer-success';
+---
+<BaseLayout title="Indicações — Dejotacode" description="Fluxo de indicações da Dejotacode para clientes e parceiros, conectado ao CRM e baseado em contexto e consentimento.">
+  <section class="section conversion-page"><div class="container">
+    <div class="page-hero"><span class="eyebrow">Indicações</span><h1>Uma indicação deve começar por confiança, não por pressão.</h1><p class="lead">Quando uma experiência é boa, o cliente pode lembrar de alguém que precisa de uma solução semelhante. O processo registra a origem e mantém a abordagem contextual.</p></div>
+    <div class="referral-grid">{referralFlow.map((item) => <article class="card referral-step"><span class="step-number">{item.step}</span><h2>{item.name}</h2><p>{item.goal}</p></article>)}</div>
+    <section class="section-tight"><div class="section-heading"><span class="eyebrow">Eventos</span><h2>Integração preparada para o CRM</h2></div><div class="event-cloud card">{customerSuccessEvents.map((event) => <code>{event}</code>)}</div></section>
+    <div class="card referral-note"><span class="tag">Regra principal</span><h2>Indicação é convite, não obrigação.</h2><p>Não oferecer benefícios ou condições enganosas, não pressionar clientes e não compartilhar dados de terceiros sem base adequada. O lead indicado entra no fluxo de qualificação do CRM.</p><a class="btn btn-primary" href="/briefing/">Enviar indicação/briefing →</a></div>
+  </div></section>
+</BaseLayout>

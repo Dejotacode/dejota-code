@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts } from '../../lib/editorial';
+const posts = (await getPublishedPosts()).filter((post) => post.categorySlug === 'tutoriais-guias').sort((a,b)=>b.publishedAt.valueOf()-a.publishedAt.valueOf());
+---
+<BaseLayout title="Tutoriais & Guias — Dejotacode" description="Passo a passo simples para resolver problemas e construir projetos.">
+  <section class="section"><div class="container">
+    <span class="eyebrow">Categoria</span><h1>Tutoriais & Guias</h1><p class="lead">Passo a passo simples para resolver problemas e construir projetos.</p>
+    <div class="grid grid-3">{posts.map((post) => <PostCard post={post} />)}</div>
+    {posts.length === 0 && <div class="card"><h2>Conteúdo chegando.</h2><p class="muted">Ainda não há artigos publicados nesta categoria. Volte em breve.</p><a class="btn btn-primary" href="/blog/">Ver todos os artigos →</a></div>}
+  </div></section>
+</BaseLayout>

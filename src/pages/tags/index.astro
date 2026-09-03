@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/editorial';
+const posts = await getPublishedPosts();
+const tags = [...new Set(posts.flatMap((post) => post.tags))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+---
+<BaseLayout title="Tags — Dejotacode" description="Explore os assuntos dos artigos do Dejotacode por tags.">
+  <section class="section"><div class="container"><span class="eyebrow">Explorar</span><h1>Tags</h1><p class="lead">Encontre conteúdos por assunto.</p><div class="tags tag-cloud">{tags.map((tag) => <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>)}</div></div></section>
+</BaseLayout>

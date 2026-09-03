@@ -1,0 +1,6 @@
+---
+const google = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bing = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+---
+{google && <meta name="google-site-verification" content={google} />}
+{bing && <meta name="msvalidate.01" content={bing} />}

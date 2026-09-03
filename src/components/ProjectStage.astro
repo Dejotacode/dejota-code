@@ -1,0 +1,10 @@
+---
+interface Props { number: string; name: string; goal: string; deliverable: string }
+const { number, name, goal, deliverable } = Astro.props;
+---
+<article class="card project-stage">
+  <span class="step-number">{number}</span>
+  <h2>{name}</h2>
+  <p>{goal}</p>
+  <small><strong>Marco:</strong> {deliverable}</small>
+</article>

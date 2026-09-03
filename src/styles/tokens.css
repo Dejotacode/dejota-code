@@ -1,0 +1,69 @@
+:root {
+  /* Cores Principais */
+  --primary: #2563eb;
+  --cyan: #00b4d8;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --ai: #8b5cf6;
+  --programming: #0891b2;
+  --security: #f97316;
+  --income: #16a34a;
+  --brand-coral: #f43f5e;
+
+  /* Cores de Tema (Light Mode) */
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --surface-2: #eef2f7;
+  --text: #111827;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --code-bg: #0f172a;
+  --code-text: #e2e8f0;
+  --accent-soft: #f8fafc;
+
+  /* Fontes */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Animações e Transições (Performáticas) */
+  --duration-fast: 0.15s;
+  --duration-base: 0.25s;
+  --duration-slow: 0.4s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-base: var(--duration-base) var(--ease-out);
+  --transition-slow: var(--duration-slow) var(--ease-out);
+
+  /* Dimensões e Sombras */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius: 16px;
+  --radius-full: 999px;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --max: 1180px;
+
+  /* Espaçamentos Padronizados */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 72px;
+}
+
+html[data-theme="dark"] {
+  --bg: #111827;
+  --surface: #172033;
+  --surface-2: #1e293b;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: #263449;
+  --code-bg: #020617;
+  --code-text: #e2e8f0;
+  --accent-soft: #1e293b;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+

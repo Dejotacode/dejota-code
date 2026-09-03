@@ -1,0 +1,10 @@
+---
+interface Props { number: string; name: string; owner: string; input: string; output: string; }
+const { number, name, owner, input, output } = Astro.props;
+---
+<article class="card os-module">
+  <span class="step-number">{number}</span>
+  <div class="os-module-head"><h2>{name}</h2><span class="tag">{owner}</span></div>
+  <p><strong>Entrada:</strong> {input}</p>
+  <p><strong>Saída:</strong> {output}</p>
+</article>

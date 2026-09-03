@@ -1,0 +1,12 @@
+---
+import type { EditorialPost } from '../lib/editorial';
+import { postUrl } from '../lib/editorial';
+interface Props { post: EditorialPost; }
+const { post } = Astro.props;
+---
+<a class="card post-card" href={postUrl(post)}>
+  <span class="tag">{post.category}</span>
+  <h3>{post.title}</h3>
+  <p class="muted">{post.description}</p>
+  <div class="post-meta"><span>{post.readingTime} min de leitura</span><span>{post.publishedAt.toLocaleDateString('pt-BR')}</span></div>
+</a>

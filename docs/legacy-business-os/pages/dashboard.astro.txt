@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KPICard from '../components/KPICard.astro';
+import { dashboardConfig, kpis, funnel, dashboards, dimensions, events, governance } from '../data/business-intelligence';
+---
+<BaseLayout title="Dashboard de Métricas e KPIs — Dejotacode" description="Dashboard executivo e arquitetura de Business Intelligence da Dejotacode.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.25 · Business Intelligence</span>
+        <h1>Transformar dados em decisões.</h1>
+        <p class="lead">Uma camada de métricas para entender aquisição, conteúdo, leads, vendas, projetos, satisfação e crescimento do Dejotacode.</p>
+      </div>
+
+      <div class="card dashboard-status">
+        <span class="tag">Dashboard {dashboardConfig.enabled ? 'ativo' : 'preparado'}</span>
+        <h2>Estrutura pronta para receber dados reais.</h2>
+        <p>{dashboardConfig.note}</p>
+      </div>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Visão executiva</span><h2>Os números que importam</h2></div>
+        <div class="dashboard-summary">
+          {['Sessões','Leads','Taxa de fechamento','Receita','Ticket médio','Satisfação'].map((label) => <div class="card metric-placeholder"><span>{label}</span><strong>—</strong><small>Sem dados conectados</small></div>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">KPIs</span><h2>Definições para medir sem confusão</h2></div>
+        <div class="kpi-grid">
+          {kpis.map((kpi) => <KPICard {...kpi} />)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Funil</span><h2>Da audiência à indicação</h2></div>
+        <div class="bi-funnel">
+          {funnel.map((item, index) => <div class="card funnel-step"><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.stage}</h3><code>{item.event}</code><small>{item.metric}</small></div>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Painéis</span><h2>5 visões de gestão</h2></div>
+        <div class="dashboard-panel-grid">
+          {dashboards.map((panel) => <article class="card dashboard-panel"><span class="tag">BI</span><h3>{panel.name}</h3><p>{panel.purpose}</p><ul>{panel.cards.map((card) => <li>{card}</li>)}</ul></article>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Dimensões</span><h2>Como cortar os dados</h2></div>
+        <div class="event-cloud">{dimensions.map((item) => <code>{item}</code>)}</div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Eventos</span><h2>Instrumentação preparada</h2></div>
+        <div class="event-cloud">{events.map((event) => <code>{event}</code>)}</div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Governança</span><h2>Dados confiáveis antes de dashboards bonitos</h2></div>
+        <ul class="card check-list dashboard-rules">{governance.map((rule) => <li>✓ {rule}</li>)}</ul>
+      </section>
+
+      <div class="conversion-box card dashboard-next-step">
+        <div><span class="tag">Próximo passo</span><h2>Dados → análise → ação.</h2><p>O dashboard deve terminar em decisões: qual conteúdo melhorar, qual oferta ajustar, qual lead priorizar e qual processo otimizar.</p></div>
+        <a class="btn btn-primary" href="/crm/">Ver CRM →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

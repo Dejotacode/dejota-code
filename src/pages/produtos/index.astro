@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { digitalProducts, monetizationChannels, offerEvents, offerLadder, offerRules } from '../../data/products';
+---
+<BaseLayout title="Produtos Digitais e Monetização — Dejotacode" description="Estratégia de produtos digitais, ofertas e monetização da Dejotacode.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.17</span>
+        <h1>Produtos Digitais + Ofertas + Monetização</h1>
+        <p class="lead">Transformar audiência em receita própria com produtos úteis, ofertas claras e uma jornada de compra sem promessas exageradas.</p>
+      </div>
+
+      <div class="card offer-principle">
+        <span class="tag">Princípio</span>
+        <h2>Não vender por vender.</h2>
+        <p class="muted">O conteúdo gratuito identifica problemas. A oferta paga organiza uma solução mais completa para quem quer economizar tempo, executar melhor ou avançar mais rápido.</p>
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Portfólio inicial</span><h2>Produtos digitais planejados</h2></div>
+      <div class="cards-grid">
+        {digitalProducts.map((product) => (
+          <article class="card product-card">
+            <span class="tag">{product.status}</span>
+            <h3>{product.name}</h3>
+            <p><strong>{product.format}</strong></p>
+            <p class="muted">{product.promise}</p>
+            <p class="product-meta"><strong>Público:</strong> {product.audience}</p>
+            <a class="btn btn-secondary" data-event="product_interest" href={product.href}>{product.cta} →</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Escada de ofertas</span><h2>Do gratuito ao premium</h2></div>
+      <div class="funnel-grid">
+        {offerLadder.map((item) => (
+          <article class="card funnel-step"><span class="step-number">0{item.level}</span><h2>{item.name}</h2><p>{item.role}</p><small>{item.examples}</small></article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Monetização</span><h2>Quatro fontes complementares</h2></div>
+      <div class="cards-grid">
+        {monetizationChannels.map((channel) => (
+          <article class="card"><span class="tag">Prioridade {channel.priority}</span><h3>{channel.name}</h3><p>{channel.model}</p><p class="muted">{channel.examples}</p></article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Oferta</span><h2>Framework simples</h2></div>
+      <div class="card offer-framework">
+        <ol>
+          <li><strong>Problema:</strong> qual dor específica estamos resolvendo?</li>
+          <li><strong>Público:</strong> para quem a solução é adequada?</li>
+          <li><strong>Resultado:</strong> qual transformação concreta e realista?</li>
+          <li><strong>Entrega:</strong> o que a pessoa recebe e em qual formato?</li>
+          <li><strong>Prova:</strong> quais exemplos, experiência ou demonstrações sustentam a oferta?</li>
+          <li><strong>Risco:</strong> quais condições, limitações, garantia e suporte serão claros antes da compra?</li>
+          <li><strong>CTA:</strong> qual é a próxima ação única?</li>
+        </ol>
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Regras</span><h2>Monetização responsável</h2></div>
+      <div class="card"><ul class="check-list">{offerRules.map((rule) => <li>{rule}</li>)}</ul></div>
+
+      <div class="section-heading"><span class="eyebrow">Medição</span><h2>Eventos da jornada comercial</h2></div>
+      <div class="tags">{offerEvents.map((event) => <span class="tag">{event}</span>)}</div>
+
+      <div class="cta-banner"><div><span class="eyebrow">Próxima evolução</span><h2>Conectar checkout e pós-venda</h2><p>Os produtos desta etapa são uma arquitetura comercial. O checkout real só deve ser ativado depois de escolher a plataforma, configurar pagamento, políticas, entrega e rastreamento.</p></div><a class="btn btn-primary" href="/checkout/">Ver checkout →</a></div>
+    </div>
+  </section>
+</BaseLayout>

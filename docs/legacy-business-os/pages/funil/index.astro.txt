@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { conversionFunnels, croChecklist, leadMagnets } from '../../data/conversion';
+---
+<BaseLayout title="Funil de Conversão — Dejotacode" description="Arquitetura de CRO, captura, relacionamento e conversão do Dejotacode.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">CRO + Funil</span>
+        <h1>Transformar tráfego em relacionamento e relacionamento em valor.</h1>
+        <p class="lead">Cada página deve responder uma pergunta e indicar um próximo passo útil — sem empurrar a pessoa para uma oferta antes da hora.</p>
+      </div>
+      <div class="funnel-grid">
+        {conversionFunnels.map((item) => <article class="card funnel-step"><span class="step-number">0{item.step}</span><h2>{item.name}</h2><p>{item.goal}</p><small>Próximo: {item.next}</small></article>)}
+      </div>
+      <section class="section-tight">
+        <span class="eyebrow">Lead magnets</span><h2>Captura por intenção</h2>
+        <div class="cards-grid">{leadMagnets.map((lead) => <article class="card"><span class="tag">{lead.segment}</span><h3>{lead.name}</h3><p class="muted">{lead.promise}</p><a class="text-link" href={lead.href}>Explorar →</a></article>)}</div>
+      </section>
+      <section class="section-tight">
+        <span class="eyebrow">Checklist</span><h2>Regra de CRO para cada página</h2>
+        <ul class="check-grid">{croChecklist.map((item) => <li class="card">✓ {item}</li>)}</ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

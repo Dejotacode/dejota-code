@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeedbackForm from '../components/FeedbackForm.astro';
+import { customerSuccessConfig, feedbackQuestions, feedbackDimensions, testimonialRules, customerSuccessMetrics } from '../data/customer-success';
+---
+<BaseLayout title="Feedback, Depoimentos e Cases — Dejotacode" description="Sistema da Dejotacode para feedback, satisfação, depoimentos, cases de sucesso e melhoria contínua.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.24 · Customer Success</span>
+        <h1>Ouvir, melhorar e transformar experiências reais em prova social.</h1>
+        <p class="lead">O objetivo é fechar o ciclo com responsabilidade: coletar feedback, aprender com cada projeto, obter autorização para depoimentos e documentar resultados reais.</p>
+      </div>
+      <div class="card customer-success-status"><span class="tag">Sistema {customerSuccessConfig.enabled ? 'ativo' : 'preparado'}</span><h2>Customer Success sem inventar resultados.</h2><p>{customerSuccessConfig.note}</p></div>
+      <div class="feedback-layout section-tight">
+        <FeedbackForm />
+        <div>
+          <div class="card"><span class="eyebrow">Perguntas</span><h2>Feedback que gera aprendizado</h2><ul class="check-list customer-list">{feedbackQuestions.map((q) => <li>✓ {q}</li>)}</ul></div>
+          <div class="card feedback-scale"><span class="eyebrow">Escala</span><h2>1 a 5</h2><div class="score-grid">{feedbackDimensions.map((item) => <span><strong>{item.score}</strong>{item.label}</span>)}</div></div>
+        </div>
+      </div>
+      <section class="section-tight"><div class="section-heading"><span class="eyebrow">Depoimentos</span><h2>Prova social com consentimento</h2></div><ul class="card check-list customer-list">{testimonialRules.map((rule) => <li>✓ {rule}</li>)}</ul></section>
+      <section class="section-tight"><div class="section-heading"><span class="eyebrow">Métricas</span><h2>O que acompanhar</h2></div><div class="metric-grid">{customerSuccessMetrics.map((metric) => <article class="card metric-card"><strong>{metric}</strong></article>)}</div></section>
+      <div class="conversion-box card customer-next"><div><span class="tag">Próximo passo</span><h2>Transformar feedback em case ou indicação.</h2><p>Depois de uma boa experiência, o cliente pode autorizar um depoimento, participar de um case ou indicar alguém — sempre de forma voluntária.</p></div><div class="customer-actions"><a class="btn btn-primary" href="/cases/" data-event="case_view">Ver cases</a><a class="btn btn-secondary" href="/indicacoes/" data-event="referral_view">Indicações</a></div></div>
+    </div>
+  </section>
+</BaseLayout>

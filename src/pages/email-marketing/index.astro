@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { automationRules, emailEvents, emailLifecycle, emailMetrics, emailSequences } from '../../data/email-marketing';
+---
+<BaseLayout title="E-mail Marketing e Automação — Dejotacode" description="Arquitetura de e-mail marketing, automações e sequências de nutrição da Dejotacode.">
+  <section class="section"><div class="container">
+    <div class="page-header"><span class="eyebrow">Etapa 5.16</span><h1>E-mail Marketing + Automação</h1><p class="lead">Transforme inscritos em uma audiência própria com mensagens úteis, segmentadas e orientadas para o próximo passo.</p></div>
+    <div class="grid grid-2">
+      <div class="card"><span class="tag">Entrada</span><h2>Inscrição</h2><p class="muted">Consentimento explícito, origem e segmento são preservados para personalizar a jornada sem coletar dados desnecessários.</p></div>
+      <div class="card"><span class="tag">Relacionamento</span><h2>Nutrição</h2><p class="muted">Cada sequência combina educação, ativação e um próximo passo coerente com o interesse da pessoa.</p></div>
+    </div>
+    <div class="section-heading"><span class="eyebrow">Sequências</span><h2>Automação planejada</h2></div>
+    <div class="grid grid-2">{emailSequences.map((sequence) => <article class="card"><span class="tag">{sequence.trigger}</span><h3>{sequence.name}</h3><p>{sequence.goal}</p><ol class="timeline-list">{sequence.emails.map((email) => <li><strong>D+{email.day}</strong> — {email.subject}<small>{email.purpose} · {email.cta}</small></li>)}</ol></article>)}</div>
+    <div class="section-heading"><span class="eyebrow">Lifecycle</span><h2>Estágios da audiência</h2></div>
+    <div class="grid grid-3">{emailLifecycle.map((stage) => <div class="card"><h3>{stage.name}</h3><p class="muted">{stage.description}</p></div>)}</div>
+    <div class="section-heading"><span class="eyebrow">Regras</span><h2>Gatilhos de automação</h2></div>
+    <div class="card"><ul class="check-list">{automationRules.map((rule) => <li>{rule}</li>)}</ul></div>
+    <div class="section-heading"><span class="eyebrow">Métricas</span><h2>O que medir</h2></div>
+    <div class="tags">{emailMetrics.map((metric) => <span class="tag">{metric}</span>)}</div>
+    <p class="muted section-note">Eventos preparados: {emailEvents.join(' · ')}.</p>
+    <div class="cta-banner"><div><span class="eyebrow">Próximo passo</span><h2>Conectar um provedor de e-mail</h2><p>As sequências são provider-neutral. Os envios reais só devem ser ativados depois de configurar provedor, domínio, consentimento e descadastro.</p></div><a class="btn btn-primary" href="/newsletter/">Ver newsletter →</a></div>
+  </div></section>
+</BaseLayout>

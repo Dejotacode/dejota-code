@@ -1,0 +1,11 @@
+---
+const { eyebrow = 'Próximo passo', title, description, href, label = 'Continuar →', eventName = 'next_step_click' } = Astro.props;
+---
+<section class="conversion-box card" data-conversion-box>
+  <div>
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    <p>{description}</p>
+  </div>
+  <a class="btn btn-primary" href={href} data-event={eventName}>{label}</a>
+</section>

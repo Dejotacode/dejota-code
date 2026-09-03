@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/editorial';
+const posts = (await getPublishedPosts()).sort((a,b) => b.publishedAt.valueOf()-a.publishedAt.valueOf());
+---
+<BaseLayout title="Buscar — Dejotacode" description="Encontre artigos, tutoriais e conteúdos no Dejotacode.">
+<section class="section"><div class="container"><span class="eyebrow">Pesquisa</span><h1>Encontre o que você precisa.</h1><p class="lead">Pesquise por título, categoria, tag ou assunto.</p>
+<form id="search-page-form" class="search search-large" role="search"><label class="sr-only" for="search-input">Termo de busca</label><input id="search-input" type="search" placeholder="Ex.: Linux, IA, freelancing..." autocomplete="off"/><button class="btn btn-primary" type="submit">Buscar</button></form>
+<p id="search-status" class="muted" aria-live="polite"></p><div id="search-results" class="grid grid-3"></div><div id="search-empty" class="card" hidden><h2>Nenhum resultado encontrado.</h2><p class="muted">Tente outro termo ou explore as categorias.</p></div><noscript><div class="card"><p>Ative JavaScript para usar a busca instantânea.</p></div></noscript>
+</div></section></BaseLayout>
+<script is:inline define:vars={{ posts: posts.map((post) => ({ title: post.title, description: post.description, category: post.category, tags: post.tags, url: `/blog/${post.id}/`, publishedAt: post.publishedAt.toISOString() })) }}>
+const form=document.getElementById('search-page-form'),input=document.getElementById('search-input'),results=document.getElementById('search-results'),status=document.getElementById('search-status'),empty=document.getElementById('search-empty');
+const initial=new URLSearchParams(location.search).get('q')||''; input.value=initial;
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[c]);
+const render=query=>{const term=query.trim().toLowerCase();const matches=term?posts.filter(p=>[p.title,p.description,p.category,...p.tags].join(' ').toLowerCase().includes(term)):posts;results.innerHTML=matches.map(p=>`<a class="card post-card" href="${p.url}"><span class="tag">${esc(p.category)}</span><h3>${esc(p.title)}</h3><p class="muted">${esc(p.description)}</p><div class="post-meta"><span>${new Date(p.publishedAt).toLocaleDateString('pt-BR')}</span></div></a>`).join('');empty.hidden=matches.length!==0;status.textContent=term?`${matches.length} resultado${matches.length===1?'':'s'} para “${query}”.`:`${posts.length} artigo${posts.length===1?'':'s'} disponível${posts.length===1?'':'eis'}.`};
+form.addEventListener('submit',e=>{e.preventDefault();const v=input.value.trim();history.replaceState({},'',v?`/buscar/?q=${encodeURIComponent(v)}`:'/buscar/');render(v)});render(initial);
+</script>

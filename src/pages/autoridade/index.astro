@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { authorityChannels, authorityRules, ninetyDayPlan } from '../../data/external-authority';
+---
+<BaseLayout title="Autoridade externa — Dejotacode" description="Estratégia de link building, Digital PR, parcerias e autoridade externa do Dejotacode.">
+  <section class="section authority-hero"><div class="container"><span class="eyebrow">Etapa 5.14</span><h1>Autoridade externa sem atalhos</h1><p class="lead">O objetivo é fazer o Dejotacode ser citado porque seus conteúdos são úteis, confiáveis e relevantes — não porque houve manipulação de links.</p></div></section>
+  <section class="section"><div class="container"><div class="grid grid-4">{authorityChannels.map((channel) => <article class="card"><span class="tag">{channel.name}</span><h2>{channel.goal}</h2><ul>{channel.tactics.map((item) => <li>{item}</li>)}</ul><p class="muted"><strong>Métrica:</strong> {channel.metric}</p></article>)}</div></div></section>
+  <section class="section"><div class="container"><span class="eyebrow">Plano de 90 dias</span><h2>Construir → relacionar → escalar</h2><div class="grid grid-3">{ninetyDayPlan.map((phase) => <article class="card"><span class="tag">{phase.phase}</span><h3>{phase.focus}</h3><ul>{phase.actions.map((action) => <li>{action}</li>)}</ul></article>)}</div></div></section>
+  <section class="section"><div class="container"><div class="card"><span class="eyebrow">Regras editoriais</span><h2>Qualidade antes de quantidade</h2><ul>{authorityRules.map((rule) => <li>{rule}</li>)}</ul></div></div></section>
+</BaseLayout>
+<style>.authority-hero{padding-bottom:28px}.authority-hero h1{max-width:900px}.card h2{font-size:1.3rem;margin:.7rem 0}.card h3{margin:.65rem 0}.card li{margin:.45rem 0;color:var(--muted);line-height:1.55}</style>

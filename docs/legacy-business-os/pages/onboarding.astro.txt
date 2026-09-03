@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { onboardingChecklist } from '../data/commercial';
+---
+<BaseLayout title="Onboarding de Clientes — Dejotacode" description="Checklist de onboarding de clientes da Dejotacode para iniciar projetos com clareza.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.22 · Onboarding</span>
+        <h1>Começar bem também faz parte da entrega.</h1>
+        <p class="lead">Um checklist simples para alinhar pessoas, materiais, acessos, cronograma e critérios de aceite antes da execução.</p>
+      </div>
+      <div class="onboarding-grid">
+        {onboardingChecklist.map((item, index) => <article class="card onboarding-item"><span class="step-number">{String(index + 1).padStart(2, '0')}</span><div><small>{item.phase}</small><h2>{item.item}</h2></div></article>)}
+      </div>
+      <div class="card onboarding-note">
+        <h2>Princípio do onboarding</h2>
+        <p>O cliente deve saber <strong>o que acontece agora, quem precisa fazer o quê, qual é o próximo marco e como o aceite será registrado</strong>.</p>
+        <a class="btn btn-primary" href="/servicos/processo/">Ver processo dos serviços →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

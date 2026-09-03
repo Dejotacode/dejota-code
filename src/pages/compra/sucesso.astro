@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { postPurchaseSequence } from '../../data/checkout';
+---
+<BaseLayout title="Compra confirmada — Dejotacode" description="Página de confirmação e próximos passos após uma compra.">
+  <section class="section purchase-result"><div class="container"><div class="card purchase-result-card"><span class="tag">Exemplo de fluxo</span><h1>Compra confirmada</h1><p class="lead">Esta página representa o destino de uma compra aprovada. A confirmação real deve vir do provedor/webhook antes de liberar qualquer produto.</p><a class="btn btn-primary" href="/produtos/">Conhecer produtos →</a></div><div class="section-heading"><span class="eyebrow">Pós-venda</span><h2>O que acontece depois</h2></div><div class="grid grid-3">{postPurchaseSequence.slice(0,3).map((item) => <article class="card"><span class="tag">D+{item.day}</span><h3>{item.name}</h3><p class="muted">{item.goal}</p></article>)}</div></div></section>
+</BaseLayout>

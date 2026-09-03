@@ -1,0 +1,15 @@
+---
+import { siteAuthor } from '../data/author';
+const { name = siteAuthor.name, reviewedBy, reviewedAt, experienceNote } = Astro.props;
+const date = reviewedAt instanceof Date ? reviewedAt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }) : undefined;
+---
+<section class="expertise-box card" aria-label="Autoria e revisão editorial">
+  <div class="author-avatar" aria-hidden="true">D</div>
+  <div>
+    <span class="eyebrow">Autoria e revisão</span>
+    <h2>{name}</h2>
+    <p>{experienceNote ?? siteAuthor.description}</p>
+    {reviewedBy && <p class="expertise-meta"><strong>Revisado por:</strong> {reviewedBy}{date ? ` · ${date}` : ''}</p>}
+    <a class="text-link" href={siteAuthor.profileUrl}>Conheça a abordagem editorial →</a>
+  </div>
+</section>

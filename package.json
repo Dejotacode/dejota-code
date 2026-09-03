@@ -1,0 +1,45 @@
+{
+  "name": "dejotacode",
+  "version": "1.0.0-rc.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/build-site.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "typecheck": "astro check",
+    "content:check": "astro check",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:remote": "wrangler d1 migrations apply DB --remote",
+    "deploy": "npm run build && wrangler pages deploy ./dist",
+    "build:site": "node scripts/build-site.mjs",
+    "validate:urls": "node scripts/validate-urls.mjs",
+    "release:check": "node scripts/release-hygiene.mjs && npm run check && npm run build && npm run validate:urls"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.2.10",
+    "hono": "^4.13.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260902.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.128.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "astro",
+    "blog",
+    "tecnologia",
+    "tutoriais",
+    "renda-digital"
+  ],
+  "allowScripts": {
+    "esbuild": true,
+    "workerd@1.20260831.1": true
+  }
+}

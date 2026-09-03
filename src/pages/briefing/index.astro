@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services } from '../../data/services';
+const apiBase = (import.meta.env.PUBLIC_API_URL ?? '').replace(/\/$/, '');
+const briefingEndpoint = apiBase ? `${apiBase}/api/public/briefing` : '/api/public/briefing';
+---
+<BaseLayout title="Briefing de Projeto — Dejotacode" description="Envie um briefing inicial para avaliar um projeto digital com a Dejotacode.">
+  <section class="section conversion-page briefing-page">
+    <div class="container">
+      <div class="page-hero"><span class="eyebrow">Briefing comercial</span><h1>Vamos entender o projeto antes de falar em proposta.</h1><p class="lead">Quanto melhor o contexto, melhor conseguimos avaliar escopo, prioridade e próximo passo.</p></div>
+      <div class="briefing-grid">
+        <form class="card lead-form service-briefing-form" data-lead-form data-event="briefing_submit" data-endpoint={briefingEndpoint} method="post">
+          <input type="hidden" name="source" value="/briefing/" />
+          <label for="service">Serviço de interesse</label>
+          <select id="service" name="service" required>
+            <option value="">Selecione</option>
+            {services.map((service) => <option value={service.slug}>{service.name}</option>)}
+          </select>
+          <label for="name">Nome</label><input id="name" name="name" type="text" autocomplete="name" required />
+          <label for="company">Empresa / projeto</label><input id="company" name="company" type="text" autocomplete="organization" />
+          <label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required />
+          <label for="objective">Qual é o objetivo principal?</label><textarea id="objective" name="objective" rows="5" required></textarea>
+          <label for="timeline">Prazo desejado</label><input id="timeline" name="timeline" type="text" placeholder="Ex.: nas próximas 4–6 semanas" />
+          <label for="budget">Faixa de investimento</label><select id="budget" name="budget"><option value="">Prefiro conversar primeiro</option><option>Até R$ 1.500</option><option>R$ 1.500–3.000</option><option>R$ 3.000–6.000</option><option>Acima de R$ 6.000</option></select>
+          <label class="consent"><input type="checkbox" name="consent" required /> <span>Concordo com o tratamento dos dados para avaliação deste contato, conforme a <a href="/privacidade/">Política de Privacidade</a>.</span></label>
+          <button class="btn btn-primary" type="submit">Enviar briefing →</button>
+          <p class="form-status muted" data-form-status role="status">Preencha os campos acima para enviar seu briefing com segurança.</p>
+        </form>
+        <aside class="card briefing-side"><span class="tag">O que acontece depois</span><h2>1. Triagem</h2><p>Verificamos objetivo, aderência e informações essenciais.</p><h2>2. Diagnóstico</h2><p>Se fizer sentido, aprofundamos o problema e definimos escopo.</p><h2>3. Proposta</h2><p>Quando houver aderência, enviamos escopo, prazo, investimento e condições.</p><h2>4. Execução</h2><p>Após aprovação e formalização, começa o projeto.</p></aside>
+      </div>
+    </div>
+  </section>
+  <script is:inline>
+    const form = document.querySelector('[data-lead-form]');
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement) || !form.checkValidity()) { form?.reportValidity?.(); return; }
+      const status = form.querySelector('[data-form-status]');
+      const button = form.querySelector('button[type="submit"]');
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) return;
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      if (status) status.textContent = 'Enviando…';
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+        if (!response.ok) throw new Error('briefing_failed');
+        const serviceValue = form.querySelector('[name="service"]')?.value || 'não informado';
+        form.reset();
+        if (status) status.textContent = 'Briefing recebido! Vamos analisar as informações e definir o próximo passo.';
+        window.dejotacodeTrack?.('briefing_submit', { service: serviceValue });
+      } catch {
+        if (status) status.textContent = 'Não foi possível enviar agora. Tente novamente em alguns instantes.';
+      } finally { if (button instanceof HTMLButtonElement) button.disabled = false; }
+    });
+    const service = new URLSearchParams(location.search).get('servico');
+    const serviceField = form?.querySelector('[name="service"]');
+    if (service && serviceField instanceof HTMLSelectElement) serviceField.value = service;
+  </script>
+</BaseLayout>

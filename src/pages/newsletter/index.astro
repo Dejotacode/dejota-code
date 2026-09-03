@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LeadMagnet from '../../components/LeadMagnet.astro';
+const apiBase = (import.meta.env.PUBLIC_API_URL ?? '').replace(/\/$/, '');
+const endpoint = apiBase ? `${apiBase}/api/newsletter/subscribe` : '/api/newsletter/subscribe';
+---
+<BaseLayout title="Newsletter — Dejotacode" description="Receba tutoriais, estratégias práticas e materiais gratuitos para aprender, construir e monetizar.">
+  <section class="section newsletter-page">
+    <div class="container">
+      <div class="newsletter-hero">
+        <span class="eyebrow">Newsletter Dejotacode</span>
+        <h1>Aprenda algo útil. Construa algo real. Avance toda semana.</h1>
+        <p class="lead">Receba novos tutoriais, ferramentas, estratégias de renda digital e materiais gratuitos — sem complicação.</p>
+      </div>
+
+      <div class="newsletter-grid">
+        <div class="card newsletter-form-card">
+          <span class="tag">Lista gratuita</span>
+          <h2>Quero receber</h2>
+          <p class="muted">Cadastre seu e-mail para receber os próximos conteúdos da Dejotacode.</p>
+          <form id="newsletter-form" class="lead-form" data-endpoint={endpoint} novalidate>
+            <label for="newsletter-name">Seu nome</label>
+            <input id="newsletter-name" name="name" type="text" autocomplete="name" placeholder="Como podemos chamar você?" required />
+
+            <label for="newsletter-email">Seu melhor e-mail</label>
+            <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+
+            <input type="hidden" name="segment" value="geral" />
+            <input type="hidden" name="source" value="/newsletter/" />
+
+            <label class="consent">
+              <input name="consent" type="checkbox" required />
+              <span>Concordo em receber conteúdos da Dejotacode e posso cancelar quando quiser. Consulte a <a href="/privacidade/">Política de Privacidade</a>.</span>
+            </label>
+
+            <button class="btn btn-primary" type="submit">Entrar para a lista →</button>
+            <p id="newsletter-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <p class="form-note">Seu cadastro é enviado diretamente para a API da Dejotacode.</p>
+        </div>
+
+        <LeadMagnet />
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector('#newsletter-form');
+    const status = document.querySelector('#newsletter-status');
+    if (form && status) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formEl = event.currentTarget;
+        if (!(formEl instanceof HTMLFormElement)) return;
+        if (!formEl.checkValidity()) {
+          formEl.reportValidity();
+          return;
+        }
+        const endpoint = formEl.dataset.endpoint;
+        const data = Object.fromEntries(new FormData(formEl).entries());
+        if (!endpoint) {
+          status.textContent = 'Formulário pronto. Configure o endpoint de newsletter para ativar a captura real.';
+          return;
+        }
+        const button = formEl.querySelector('button[type="submit"]');
+        if (button instanceof HTMLButtonElement) button.disabled = true;
+        status.textContent = 'Enviando…';
+        try {
+          const response = await fetch(endpoint, { method: 'POST', body: JSON.stringify(data), headers: { Accept: 'application/json', 'Content-Type': 'application/json' } });
+          if (!response.ok) throw new Error('Falha no envio');
+          formEl.reset();
+          status.textContent = 'Cadastro realizado! Confira seu e-mail para os próximos passos.';
+        } catch {
+          status.textContent = 'Não foi possível concluir agora. Tente novamente em alguns instantes.';
+        } finally {
+          if (button instanceof HTMLButtonElement) button.disabled = false;
+        }
+      });
+    }
+  </script>
+</BaseLayout>
+

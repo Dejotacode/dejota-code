@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinanceCard from '../components/FinanceCard.astro';
+import { financeConfig, revenueStreams, costCategories, financialKPIs, cashFlowCategories, financialCadence, profitabilityRules } from '../data/finance';
+---
+<BaseLayout title="Financeiro — Dejotacode Business OS" description="Receita, custos, fluxo de caixa e rentabilidade do Dejotacode.">
+  <main class="page-shell"><div class="container">
+    <section class="hero hero-compact"><span class="eyebrow">Etapa 5.27 · Financeiro</span><h1>Dinheiro precisa virar <span class="gradient-text">informação para decisão.</span></h1><p class="lead">A camada financeira conecta vendas, recebimentos, custos, caixa e rentabilidade ao Business OS, mantendo os dados reais fora do frontend público até uma integração segura.</p><div class="hero-actions"><a class="btn btn-primary" href="/operacoes/">Centro de Operações →</a><a class="btn btn-secondary" href="/dashboard/">Ver BI</a></div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Status</span><h2>Financeiro {financeConfig.enabled ? 'ativo' : 'preparado'}</h2><p>{financeConfig.note}</p></div><div class="card finance-status"><strong>Moeda-base:</strong> {financeConfig.currency} <span>·</span> <strong>Integração:</strong> {financeConfig.provider}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Receitas</span><h2>De onde vem o dinheiro?</h2></div><div class="finance-grid">{revenueStreams.map((item)=><FinanceCard title={item.name} detail={item.examples}/>)}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Custos</span><h2>Para onde o dinheiro vai?</h2></div><div class="finance-grid">{costCategories.map((item)=><FinanceCard title={item.name} detail={item.examples}/>)}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">KPIs</span><h2>Rentabilidade sem maquiagem</h2></div><div class="finance-grid">{financialKPIs.map((k)=><FinanceCard title={k.name} detail="Indicador financeiro do Business OS." formula={k.formula}/>)}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Caixa</span><h2>Fluxo de caixa</h2></div><div class="finance-flow-grid">{cashFlowCategories.map((group)=><article class="card"><span class="tag">{group.name}</span><ul class="check-list">{group.items.map(item=><li>✓ {item}</li>)}</ul></article>)}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Cadência</span><h2>Quando analisar?</h2></div><div class="cadence-grid">{financialCadence.map(c=><article class="card cadence-card"><span class="tag">{c.cadence}</span><h3>{c.cadence}</h3><p>{c.focus}</p></article>)}</div></section>
+    <section class="section"><div class="section-heading"><span class="eyebrow">Governança</span><h2>Regras financeiras</h2></div><ul class="card check-list finance-rules">{profitabilityRules.map(r=><li>✓ {r}</li>)}</ul></section>
+    <section class="section"><div class="conversion-box card"><div><span class="tag">Próximo passo</span><h2>Financeiro → BI → decisão.</h2><p>Quando houver dados reais, o financeiro alimentará KPIs, previsões e decisões de preço, aquisição, contratação e prioridades.</p></div><a class="btn btn-primary" href="/dashboard/">Abrir dashboard</a></div></section>
+  </div></main>
+</BaseLayout>

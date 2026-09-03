@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { checkoutConfig, checkoutEnvironment, checkoutSecurityRules, deliveryModels, paymentMethods, purchaseFlow } from '../../data/checkout';
+---
+<BaseLayout title="Checkout e Pagamentos — Dejotacode" description="Arquitetura de checkout, pagamentos, entrega digital e segurança da Dejotacode.">
+  <section class="section checkout-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.18</span>
+        <h1>Checkout + Pagamentos + Entrega + Pós-venda</h1>
+        <p class="lead">Uma arquitetura pronta para transformar uma oferta em uma compra segura, com confirmação, entrega e relacionamento depois da venda.</p>
+      </div>
+
+      <div class="card checkout-status">
+        <span class="tag">Status: {checkoutConfig.enabled ? 'ativo' : 'provider-neutral'}</span>
+        <h2>O checkout real ainda não está conectado.</h2>
+        <p class="muted">{checkoutConfig.note}</p>
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Jornada</span><h2>Da oferta ao pós-venda</h2></div>
+      <div class="grid grid-3">
+        {purchaseFlow.map((item) => (
+          <article class="card checkout-step"><span class="step-number">0{item.step}</span><h3>{item.name}</h3><p class="muted">{item.description}</p></article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Pagamento</span><h2>Métodos planejados</h2></div>
+      <div class="grid grid-3">
+        {paymentMethods.map((method) => (
+          <article class="card"><span class="tag">{method.status}</span><h3>{method.name}</h3><p class="muted">{method.note}</p></article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Entrega</span><h2>Modelos de entrega digital</h2></div>
+      <div class="grid grid-3">
+        {deliveryModels.map((model) => (
+          <article class="card"><h3>{model.name}</h3><p class="muted">{model.description}</p></article>
+        ))}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Segurança</span><h2>Regras antes de vender</h2></div>
+      <div class="card"><ul class="check-list">{checkoutSecurityRules.map((rule) => <li>{rule}</li>)}</ul></div>
+
+      <div class="section-heading"><span class="eyebrow">Ambiente</span><h2>Configuração preparada</h2></div>
+      <div class="grid grid-3">
+        <article class="card"><h3>Variáveis públicas</h3><div class="tags">{checkoutEnvironment.publicVariables.map((item) => <span class="tag">{item}</span>)}</div></article>
+        <article class="card"><h3>Segredos de servidor</h3><div class="tags">{checkoutEnvironment.serverVariables.map((item) => <span class="tag">{item}</span>)}</div></article>
+        <article class="card"><h3>Antes da produção</h3><ul class="check-list">{checkoutEnvironment.requiredBeforeProduction.map((item) => <li>{item}</li>)}</ul></article>
+      </div>
+
+      <div class="cta-banner"><div><span class="eyebrow">Próximo passo</span><h2>Escolher o provedor e ativar a operação</h2><p>Quando houver um provedor definido, esta camada pode receber URLs de checkout, webhooks, confirmação de pagamento e entrega protegida sem colocar segredos no front-end.</p></div><a class="btn btn-primary" href="/produtos/">Voltar aos produtos →</a></div>
+    </div>
+  </section>
+</BaseLayout>

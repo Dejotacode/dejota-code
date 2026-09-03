@@ -1,0 +1,9 @@
+---
+interface Props { number: string; name: string; goal: string; }
+const { number, name, goal } = Astro.props;
+---
+<article class="card crm-stage">
+  <span class="step-number">{number}</span>
+  <h2>{name}</h2>
+  <p>{goal}</p>
+</article>

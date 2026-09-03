@@ -1,0 +1,12 @@
+---
+type FAQItem = { question: string; answer: string };
+const { items = [] }: { items?: FAQItem[] } = Astro.props;
+---
+{items.length > 0 && <section class="faq" aria-labelledby="faq-title">
+  <span class="eyebrow">Dúvidas comuns</span>
+  <h2 id="faq-title">Perguntas frequentes</h2>
+  {items.map((item) => <details class="faq-item">
+    <summary>{item.question}</summary>
+    <p>{item.answer}</p>
+  </details>)}
+</section>}

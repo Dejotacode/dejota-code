@@ -1,0 +1,7 @@
+/categoria/tutoriais /tutoriais-guias/ 301
+/categoria/:slug /:slug/ 301
+/tutoriais/ /tutoriais-guias/ 301
+/tag/:slug /tags/:slug/ 301
+/feed.xml /rss.xml 301
+/sitemap.xml /sitemap-index.xml 301
+/buscar /buscar/ 301

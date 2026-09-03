@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CRMStage from '../components/CRMStage.astro';
+import { crmConfig, qualification, automations, followUpSequence, crmRules } from '../data/crm';
+---
+<BaseLayout title="CRM e Pipeline Comercial — Dejotacode" description="Estratégia de CRM, pipeline de leads e automação comercial da Dejotacode.">
+  <section class="section conversion-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.21 · Operação comercial</span>
+        <h1>Do primeiro contato ao pós-venda.</h1>
+        <p class="lead">Um pipeline simples para transformar oportunidades em projetos, sem perder contexto, prazos ou relacionamento.</p>
+      </div>
+
+      <div class="card crm-status">
+        <span class="tag">CRM {crmConfig.enabled ? 'ativo' : 'preparado'}</span>
+        <h2>Arquitetura pronta, integração real ainda desligada.</h2>
+        <p>{crmConfig.note}</p>
+      </div>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Pipeline</span><h2>8 estágios comerciais</h2></div>
+        <div class="crm-grid">
+          {crmConfig.stages.map((stage, index) => <CRMStage number={String(index + 1).padStart(2, '0')} name={stage.name} goal={stage.goal} />)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Qualificação</span><h2>Priorizar antes de vender</h2></div>
+        <div class="cards-grid">
+          {qualification.score.map((item) => <div class="card"><strong>{item.points} pts</strong><h3>{item.criterion}</h3><p class="muted">Critério usado na triagem comercial.</p></div>)}
+        </div>
+        <div class="crm-bands">
+          {qualification.bands.map((band) => <div class="card"><strong>{band.name} · {band.min}+</strong><p>{band.action}</p></div>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Automação</span><h2>Menos tarefa repetitiva, mais contexto</h2></div>
+        <div class="cards-grid">
+          {automations.map((item) => <div class="card"><code>{item.trigger}</code><p>{item.action}</p></div>)}
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Follow-up</span><h2>Cadência comercial responsável</h2></div>
+        <ol class="card timeline-list crm-timeline">
+          {followUpSequence.map((item) => <li><strong>{item.day}</strong> — {item.action}</li>)}
+        </ol>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-heading"><span class="eyebrow">Governança</span><h2>Regras do processo</h2></div>
+        <ul class="card check-list crm-rules">
+          {crmRules.map((rule) => <li>✓ {rule}</li>)}
+        </ul>
+      </section>
+
+      <div class="conversion-box card">
+        <div><span class="tag">Próximo passo</span><h2>Quer solicitar um projeto?</h2><p>Comece pelo briefing. O pipeline começa com contexto, não com pressão comercial.</p></div>
+        <a class="btn btn-primary" href="/briefing/" data-event="briefing_start">Enviar briefing →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

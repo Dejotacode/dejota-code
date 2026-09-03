@@ -1,0 +1,10 @@
+# Cloudflare Worker local development values. Never commit real secrets.
+APP_ENV=development
+SESSION_TTL_SECONDS=604800
+APP_URL=http://localhost:4321
+
+# Production: configure the real Pages Deploy Hook as a Worker secret.
+# PAGES_DEPLOY_HOOK_URL=https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/...
+
+# One-time owner bootstrap. Use a long random value and remove/rotate it after bootstrap.
+# BOOTSTRAP_TOKEN=

@@ -1,0 +1,12 @@
+---
+interface Props { service: { slug: string; name: string; short: string; audience: string; deliverables: readonly string[]; model: string; priority: string }; }
+const { service } = Astro.props;
+---
+<article class="card service-card">
+  <div class="service-card-top"><span class="tag">{service.model}</span><span class="service-priority">{service.priority}</span></div>
+  <h2>{service.name}</h2>
+  <p>{service.short}</p>
+  <p class="service-audience"><strong>Ideal para:</strong> {service.audience}</p>
+  <ul class="service-list">{service.deliverables.map((item) => <li>{item}</li>)}</ul>
+  <a class="btn btn-secondary" data-event="service_interest" data-service={service.slug} href={`/briefing/?servico=${service.slug}`}>Tenho interesse →</a>
+</article>

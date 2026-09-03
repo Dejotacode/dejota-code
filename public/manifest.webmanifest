@@ -1,0 +1,10 @@
+{
+  "name": "Dejotacode",
+  "short_name": "Dejotacode",
+  "description": "Aqui transformo conhecimento em renda.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#2563EB",
+  "lang": "pt-BR"
+}

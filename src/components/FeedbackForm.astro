@@ -1,0 +1,46 @@
+---
+export interface Props {
+  endpoint?: string;
+}
+
+const apiBase = (import.meta.env.PUBLIC_API_URL ?? '').replace(/\/$/, '');
+const { endpoint = apiBase ? `${apiBase}/api/public/feedback` : '/api/public/feedback' } = Astro.props;
+---
+<form class="feedback-form card" data-feedback-form data-endpoint={endpoint} action={endpoint || undefined} method="post">
+  <span class="tag">Feedback</span>
+  <h2>Como foi sua experiência?</h2>
+  <p class="muted">Seu feedback é enviado com validação e proteção contra abuso para a API da Dejotacode.</p>
+
+  <label for="feedback-name">Nome</label>
+  <input id="feedback-name" name="name" type="text" autocomplete="name" required />
+
+  <label for="feedback-email">E-mail</label>
+  <input id="feedback-email" name="email" type="email" autocomplete="email" required />
+
+  <label for="feedback-project">Projeto/serviço</label>
+  <input id="feedback-project" name="project" type="text" required />
+
+  <label for="feedback-score">Satisfação geral (1–5)</label>
+  <select id="feedback-score" name="score" required>
+    <option value="">Selecione</option>
+    <option value="1">1 — Muito ruim</option>
+    <option value="2">2 — Ruim</option>
+    <option value="3">3 — Regular</option>
+    <option value="4">4 — Bom</option>
+    <option value="5">5 — Excelente</option>
+  </select>
+
+  <label for="feedback-message">O que funcionou bem e o que podemos melhorar?</label>
+  <textarea id="feedback-message" name="message" rows="6" required></textarea>
+
+  <label class="consent">
+    <input name="contactConsent" type="checkbox" required />
+    <span>Autorizo o contato sobre este feedback e concordo com a <a href="/privacidade/">Política de Privacidade</a>.</span>
+  </label>
+
+  <button class="btn btn-primary" type="submit">Enviar feedback</button>
+  <p class="form-status" data-feedback-status role="status" aria-live="polite"></p>
+  <input type="hidden" name="source" value="/feedback/" />
+</form>
+
+<script src="../scripts/forms.ts"></script>

@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { linkableAssets } from '../../data/external-authority';
+---
+<BaseLayout title="Recursos — Dejotacode" description="Recursos práticos do Dejotacode para aprender, construir e monetizar com tecnologia e projetos digitais.">
+  <section class="section resource-hero"><div class="container"><span class="eyebrow">Recursos abertos</span><h1>Materiais para aprender e construir</h1><p class="lead">Uma central de guias, checklists e projetos que você pode consultar, compartilhar e usar como ponto de partida.</p></div></section>
+  <section class="section"><div class="container grid grid-3">{linkableAssets.map((asset) => <a class="card resource-card" href={asset.href}><span class="tag">Recurso</span><h2>{asset.title}</h2><p class="muted">{asset.description}</p><span class="text-link">Acessar recurso →</span></a>)}</div></section>
+  <section class="section"><div class="container"><div class="card resource-note"><span class="eyebrow">Para criadores e educadores</span><h2>Quer citar um recurso?</h2><p>Se um material do Dejotacode complementar seu conteúdo, use a referência que fizer sentido para seus leitores. A prioridade é utilidade e contexto — não quantidade de links.</p><a class="btn btn-primary" href="/contato/">Falar com o Dejotacode →</a></div></div></section>
+</BaseLayout>
+<style>.resource-hero{padding-bottom:28px}.resource-hero h1{max-width:850px}.resource-card{display:flex;flex-direction:column;gap:10px}.resource-card h2{font-size:1.35rem;margin:.4rem 0}.resource-card p{margin:0;flex:1}.resource-note{max-width:850px}.resource-note h2{margin:.4rem 0}.resource-note p{color:var(--muted);max-width:720px}</style>

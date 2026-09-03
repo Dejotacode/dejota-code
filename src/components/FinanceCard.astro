@@ -1,0 +1,5 @@
+---
+interface Props { title: string; detail: string; formula?: string; }
+const { title, detail, formula } = Astro.props;
+---
+<article class="card finance-card"><span class="tag">Financeiro</span><h3>{title}</h3><p>{detail}</p>{formula && <code>{formula}</code>}</article>

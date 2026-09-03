@@ -1,0 +1,9 @@
+---
+interface Props { number: string; stage: string; goal: string; }
+const { number, stage, goal } = Astro.props;
+---
+<article class="card proposal-stage">
+  <span class="step-number">{number}</span>
+  <h2>{stage}</h2>
+  <p>{goal}</p>
+</article>

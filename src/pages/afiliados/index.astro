@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import { affiliateCategories, affiliateEvents, affiliateStrategy, recommendationRules } from '../../data/affiliates';
+---
+<BaseLayout title="Afiliados e Recomendações — Dejotacode" description="Política e estratégia de recomendações, links de afiliados e monetização por conteúdo da Dejotacode.">
+  <section class="section affiliate-page">
+    <div class="container">
+      <div class="page-hero">
+        <span class="eyebrow">Etapa 5.19</span>
+        <h1>Afiliados + Recomendações + Monetização por Conteúdo</h1>
+        <p class="lead">Monetizar conteúdo sem transformar a confiança do leitor em uma vitrine de links. A recomendação vem depois do contexto, dos critérios e da transparência.</p>
+      </div>
+
+      <AffiliateDisclosure />
+
+      <div class="section-heading"><span class="eyebrow">Estratégia</span><h2>Conteúdo → recomendação → decisão</h2></div>
+      <div class="funnel-grid">
+        {affiliateStrategy.funnel.map((item) => <article class="card funnel-step"><span class="step-number">0{item.step}</span><h2>{item.name}</h2><p>{item.goal}</p></article>)}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Categorias</span><h2>Onde as recomendações podem entrar</h2></div>
+      <div class="cards-grid">
+        {affiliateCategories.map((category) => <article class="card"><span class="tag">{category.name}</span><h3>{category.audience}</h3><p class="muted">Critérios editoriais:</p><div class="tags">{category.criteria.map((criterion) => <span class="tag tag-muted">{criterion}</span>)}</div></article>)}
+      </div>
+
+      <div class="section-heading"><span class="eyebrow">Regras</span><h2>Credibilidade antes da comissão</h2></div>
+      <div class="card"><ul class="check-list">{recommendationRules.map((rule) => <li>{rule}</li>)}</ul></div>
+
+      <div class="section-heading"><span class="eyebrow">Medição</span><h2>Eventos preparados</h2></div>
+      <div class="tags">{affiliateEvents.map((event) => <span class="tag">{event}</span>)}</div>
+
+      <div class="cta-banner"><div><span class="eyebrow">Próximo passo</span><h2>Ver recomendações planejadas</h2><p>As recomendações reais só entram quando houver fornecedor, condições, critérios e link oficial validados.</p></div><a class="btn btn-primary" href="/recomendacoes/">Ver recomendações →</a></div>
+    </div>
+  </section>
+</BaseLayout>
