@@ -1,4 +1,11 @@
-# Dejotacode V1.0.0 — RC1
+# DejotaCode — legado v1.0.0
+
+> [!IMPORTANT]
+> **Repositório histórico / LEGACY.** Este código preserva a arquitetura anterior do DejotaCode e não recebe mais desenvolvimento ativo. O projeto atual continua em [`Dejotacode/dejotacode`](https://github.com/Dejotacode/dejotacode) e a API atual em [`Dejotacode/dejotacode-api`](https://github.com/Dejotacode/dejotacode-api).
+>
+> O conteúdo abaixo é mantido como registro técnico da evolução do projeto.
+
+## RC1 histórico
 
 Plataforma editorial e Business OS do Dejotacode.
 
